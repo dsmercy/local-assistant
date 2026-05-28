@@ -90,9 +90,17 @@ class OllamaClient:
                     if not line:
                         continue
                     chunk = json.loads(line)
-                    token: str = chunk.get("message", {}).get("content", "")
+                    msg = chunk.get("message", {})
+                    token: str = msg.get("content", "")
                     if token:
                         yield token
+                    # Surface tool calls as a serialised JSON token for the agent loop
+                    for tc in msg.get("tool_calls") or []:
+                        fn = tc.get("function", {})
+                        yield json.dumps(
+                            {"name": fn.get("name", ""), "arguments": fn.get("arguments", {})},
+                            separators=(",", ":"),
+                        )
                     if chunk.get("done"):
                         break
         except asyncio.CancelledError:

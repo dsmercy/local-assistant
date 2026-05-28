@@ -73,6 +73,19 @@ fetch-and-ingest: fetch-docs ingest
 fetch-url:
 	@read -p "URL to fetch: " url; python scripts/fetch_docs.py --url "$$url"
 
+
+Adding 1 new URL?
+  → python scripts/fetch_docs.py --url <url>
+
+Adding several new URLs to docs-urls.txt?
+  → python scripts/fetch_docs.py --skip-existing
+
+Want to re-download everything fresh (e.g. docs updated)?
+  → python scripts/fetch_docs.py          ← no flag, overwrites all
+
+After any of the above, always run:
+  → python scripts/ingest.py	
+
 # ── Fine-tuning ────────────────────────────────────────────────────────────
 finetune:
 	python scripts/finetune.py
