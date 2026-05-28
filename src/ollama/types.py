@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass(frozen=True)
@@ -11,4 +12,4 @@ class ChatMessage:
 class ToolDefinition:
     name: str
     description: str
-    parameters_schema: dict  # type: ignore[type-arg]  # JSON Schema dict
+    parameters_schema: dict[str, Any]  # JSON Schema dict

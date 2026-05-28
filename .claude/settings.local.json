@@ -7,7 +7,8 @@
       "Bash(powershell.exe -Command \"ollama list 2>&1\")",
       "Bash(mkdir -p \"/c/Users/mercy/.claude/projects/c--Projects-AI-Projects-local-assistant/memory\")",
       "Read(//c/Users/mercy/.claude/projects/c--Projects-AI-Projects-local-assistant/**)",
-      "Bash(powershell.exe -Command \"& 'C:\\\\Projects\\\\AI Projects\\\\local-assistant\\\\.venv\\\\Scripts\\\\pytest.exe' 'C:\\\\Projects\\\\AI Projects\\\\local-assistant\\\\tests\\\\ollama' -v 2>&1\")"
+      "Bash(powershell.exe -Command \"& 'C:\\\\Projects\\\\AI Projects\\\\local-assistant\\\\.venv\\\\Scripts\\\\pytest.exe' 'C:\\\\Projects\\\\AI Projects\\\\local-assistant\\\\tests\\\\ollama' -v 2>&1\")",
+      "Bash(powershell.exe -Command \"& 'C:\\\\Projects\\\\AI Projects\\\\local-assistant\\\\.venv\\\\Scripts\\\\pytest.exe' tests/workspace tests/tools tests/security -v --tb=short 2>&1 | Select-Object -Last 20\")"
     ]
   }
 }
