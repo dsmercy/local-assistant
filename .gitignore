@@ -1,0 +1,36 @@
+# Python
+.venv/
+.venv-finetune/
+__pycache__/
+*.pyc
+*.pyo
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+htmlcov/
+.coverage
+coverage.xml
+
+# Environment
+.env
+
+# ChromaDB
+chroma_db/
+
+# Fine-tuning
+lora_output/
+*.gguf
+*.bin
+data/training.jsonl
+finetune.log
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+# Fine-tuned model — run after Phase 07
+# Usage: ollama create my-coder -f modelfiles/Modelfile.custom-coder
+# Requires: my-qwen-coder-Q4_K_M.gguf in the project root
+
+FROM ./my-qwen-coder-Q4_K_M.gguf
+
+SYSTEM """
+You are a specialized coding assistant fine-tuned on this project's codebase.
+Follow all standards from agent-instructions/system-prompt.md exactly.
+You know the conventions, patterns, and architecture of this specific codebase.
+"""
+
+PARAMETER temperature 0.1
+PARAMETER num_ctx 32768
+PARAMETER stop "<|im_end|>"

@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python*)",
+      "Bash(pip*)",
+      "Bash(pytest*)",
+      "Bash(ruff*)",
+      "Bash(mypy*)",
+      "Bash(uvicorn*)",
+      "Bash(ollama*)",
+      "Bash(make*)",
+      "Bash(mkdir*)",
+      "Bash(touch*)",
+      "Bash(ls*)",
+      "Bash(find*)",
+      "Bash(grep*)",
+      "Bash(cat*)",
+      "Bash(cp*)",
+      "Bash(mv*)",
+      "Bash(echo*)",
+      "Read(**)",
+      "Write(src/**)",
+      "Write(tests/**)",
+      "Write(scripts/**)",
+      "Write(modelfiles/**)",
+      "Write(context_store/**)",
+      "Write(.env)",
+      "Write(pyproject.toml)",
+      "Write(Makefile)",
+      "Write(README.md)"
+    ],
+    "deny": [
+      "Bash(rm*)",
+      "Bash(curl*)",
+      "Bash(wget*)",
+      "Bash(bash*)",
+      "Bash(sh*)",
+      "Bash(sudo*)",
+      "Write(agent-instructions/**)",
+      "Write(checklists/**)",
+      "Write(CLAUDE.md)",
+      "Write(.claude/**)"
+    ]
+  },
+  "env": {
+    "PYTHONPATH": "."
+  }
+}
