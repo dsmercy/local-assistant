@@ -1,4 +1,4 @@
-.PHONY: all setup serve ingest test check coverage pull-models finetune clean
+.PHONY: all setup serve ingest test check coverage pull-models finetune clean fetch-install fetch-docs fetch-docs-dry fetch-and-ingest fetch-url
 
 # ── Setup ──────────────────────────────────────────────────────────────────
 setup:
@@ -52,6 +52,26 @@ phase-06:
 	pytest --cov=src --cov-fail-under=80 -v && ruff check . && mypy src/
 phase-07:
 	@echo "Phase 07: run python scripts/finetune.py manually"
+
+
+# ── Documentation fetching ─────────────────────────────────────────────────
+fetch-install:
+	pip install -e ".[fetch]"
+	@echo "\nFetch dependencies installed."
+
+fetch-docs:
+	python scripts/fetch_docs.py
+
+fetch-docs-dry:
+	python scripts/fetch_docs.py --dry-run
+
+# Convenience: fetch + ingest in one command
+fetch-and-ingest: fetch-docs ingest
+	@echo "\nDocs fetched and indexed. Restart the agent server."
+
+# Update docs for a specific URL
+fetch-url:
+	@read -p "URL to fetch: " url; python scripts/fetch_docs.py --url "$$url"
 
 # ── Fine-tuning ────────────────────────────────────────────────────────────
 finetune:

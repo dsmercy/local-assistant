@@ -138,6 +138,33 @@ pytest --cov=src --cov-fail-under=80 && ruff check . && mypy src/
 
 ---
 
+---
+
+## Adding documentation to the agent
+
+To teach the agent about specific .NET versions (or any other technology):
+
+1. **Add URLs** to `docs-urls.txt`
+2. **Fetch** the docs: `make fetch-docs` (downloads + cleans each page)
+3. **Index** into ChromaDB: `make ingest`
+4. **Verify** retrieval: `/fetch-docs` slash command explains the full flow
+
+```
+docs-urls.txt          ← list of documentation URLs (one per line)
+scripts/fetch_docs.py  ← fetcher script (httpx + trafilatura)
+context_store/
+└── instructions/
+    └── dotnet/
+        ├── core-3x/   ← .NET Core 3.x docs
+        ├── dotnet-6/  ← .NET 6 docs
+        ├── dotnet-8/  ← .NET 8 docs
+        └── dotnet-10/ ← .NET 10 docs
+```
+
+Checklist: `checklists/docs-fetching-checklist.md`
+
+---
+
 ## Folders Claude Code must never read
 
 ```
