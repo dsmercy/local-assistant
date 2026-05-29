@@ -20,7 +20,7 @@ import asyncio
 import re
 import sys
 from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
 
 import httpx
 
@@ -229,7 +229,7 @@ async def fetch_one(
         markdown = build_markdown(content, url, version)
 
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(markdown, encoding="utf-8")
+        dest.write_text(markdown, encoding="utf-8")  # noqa: ASYNC240
 
         rel = dest.relative_to(Path.cwd())
         print(f"  ✓ {len(content):>7,} chars  →  {rel}")
@@ -266,7 +266,7 @@ async def run(args: argparse.Namespace) -> None:
     # Resolve URLs
     if args.url:
         urls = [args.url]
-    elif URLS_FILE.exists():
+    elif URLS_FILE.exists():  # noqa: ASYNC240
         urls = load_urls(URLS_FILE)
     else:
         print(f"Error: {URLS_FILE} not found. Create it or pass --url.")
@@ -322,8 +322,8 @@ async def run(args: argparse.Namespace) -> None:
     else:
         print(f"  Done — {success} succeeded, {failed} failed")
         if success > 0:
-            print(f"\n  ✅ Next step: make ingest")
-            print(f"     This indexes the downloaded docs into ChromaDB.")
+            print("\n  ✅ Next step: make ingest")
+            print("     This indexes the downloaded docs into ChromaDB.")
     print(f"{'═' * 60}\n")
 
 
