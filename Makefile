@@ -8,7 +8,7 @@ setup:
 	@echo "\nSetup complete. Activate: source .venv/bin/activate"
 
 pull-models:
-	ollama pull qwen2.5-coder:14b
+	ollama pull qwen2.5-coder:7b
 	ollama pull nomic-embed-text
 	ollama pull llava:13b
 	@echo "\nAll models ready."

@@ -35,7 +35,7 @@ You are accessed exclusively through **Continue.dev in VS Code**.
 | Layer | Technologies |
 |---|---|
 | Language | Python 3.11+ |
-| LLM runtime | Ollama (`qwen2.5-coder:14b`) |
+| LLM runtime | Ollama (`qwen2.5-coder:7b`) |
 | Agent framework | LangChain |
 | Vector store | ChromaDB |
 | Embeddings | nomic-embed-text |
@@ -65,7 +65,7 @@ For entirely unrelated topics respond:
 | Layer | Choice |
 |---|---|
 | LLM runtime | Ollama — `localhost:11434` |
-| Primary model | `qwen2.5-coder:14b` |
+| Primary model | `qwen2.5-coder:7b` |
 | Vision model | `llava:13b` — image / screenshot / UI analysis only |
 | Embeddings | `nomic-embed-text` — retrieval only, never generation |
 | Agent framework | LangChain |
@@ -879,7 +879,7 @@ from pydantic_settings import BaseSettings
 
 class OllamaOptions(BaseSettings):
     endpoint: str = "http://localhost:11434"
-    model_name: str = "qwen2.5-coder:14b"
+    model_name: str = "qwen2.5-coder:7b"
     timeout_seconds: int = 120
     model_config = {"env_prefix": "OLLAMA_"}
 

@@ -1,7 +1,7 @@
 # Base model — no fine-tuning required
 # Usage: ollama create project-coder -f modelfiles/Modelfile.qwen-coder
 
-FROM qwen2.5-coder:14b
+FROM qwen2.5-coder:7b
 
 SYSTEM """
 You are a coding assistant for a .NET fullstack developer who also uses

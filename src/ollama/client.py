@@ -74,35 +74,31 @@ class OllamaClient:
                 for t in tools
             ]
 
+        # Use non-streaming POST: httpx streaming (aiter_lines / stream context manager)
+        # hangs on Windows ProactorEventLoop; a regular awaited POST is reliable.
+        payload["stream"] = False
+
         logger.debug("stream_chat_started", model=self._options.model_name)
         try:
-            async with self._http.stream(
-                "POST",
+            response = await self._http.post(
                 f"{self._options.endpoint}/api/chat",
                 json=payload,
-            ) as response:
-                if response.status_code != 200:
-                    body = await response.aread()
-                    raise OllamaUnavailableError(
-                        f"Ollama returned {response.status_code}: {body.decode()}"
-                    )
-                async for line in response.aiter_lines():
-                    if not line:
-                        continue
-                    chunk = json.loads(line)
-                    msg = chunk.get("message", {})
-                    token: str = msg.get("content", "")
-                    if token:
-                        yield token
-                    # Surface tool calls as a serialised JSON token for the agent loop
-                    for tc in msg.get("tool_calls") or []:
-                        fn = tc.get("function", {})
-                        yield json.dumps(
-                            {"name": fn.get("name", ""), "arguments": fn.get("arguments", {})},
-                            separators=(",", ":"),
-                        )
-                    if chunk.get("done"):
-                        break
+            )
+            if response.status_code != 200:
+                raise OllamaUnavailableError(
+                    f"Ollama returned {response.status_code}: {response.text}"
+                )
+            data = response.json()
+            msg = data.get("message", {})
+            token: str = msg.get("content", "")
+            if token:
+                yield token
+            for tc in msg.get("tool_calls") or []:
+                fn = tc.get("function", {})
+                yield json.dumps(
+                    {"name": fn.get("name", ""), "arguments": fn.get("arguments", {})},
+                    separators=(",", ":"),
+                )
         except asyncio.CancelledError:
             raise
         except OllamaUnavailableError:

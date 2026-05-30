@@ -9,7 +9,7 @@ No external API calls. No usage costs. Everything runs on your machine.
 | Layer | Tech |
 |---|---|
 | Agent infrastructure | Python 3.11 · FastAPI · LangChain · ChromaDB |
-| LLM | Ollama `qwen2.5-coder:14b` |
+| LLM | Ollama `qwen2.5-coder:7b` |
 | Embeddings | `nomic-embed-text` via Ollama |
 | Developer help target | C# · ASP.NET Core · EF Core · React · Node.js · JS |
 | IDE interface | Continue.dev (VS Code) |
@@ -23,7 +23,7 @@ make setup                     # creates .venv + installs deps + copies .env
 
 # 2. Start Ollama and pull models
 ollama serve &
-make pull-models               # downloads qwen2.5-coder:14b + nomic-embed-text + llava:13b
+make pull-models               # downloads qwen2.5-coder:7b + nomic-embed-text + llava:13b
 
 # 3. Add your context (optional but recommended)
 #    Drop .md docs into context_store/instructions/

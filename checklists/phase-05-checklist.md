@@ -89,8 +89,8 @@ cat ~/.continue/config.json | python3 -m json.tool > /dev/null && echo "Valid JS
 ```
 
 - [ ] `~/.continue/config.json` is valid JSON
-- [ ] `models` array contains entry with `"model": "qwen2.5-coder:14b"`
-- [ ] `tabAutocompleteModel` is set to `qwen2.5-coder:14b`
+- [ ] `models` array contains entry with `"model": "qwen2.5-coder:7b"`
+- [ ] `tabAutocompleteModel` is set to `qwen2.5-coder:7b`
 - [ ] `embeddingsProvider` model is `nomic-embed-text`
 - [ ] `contextProviders` includes `"code"`, `"file"`, `"codebase"`
 

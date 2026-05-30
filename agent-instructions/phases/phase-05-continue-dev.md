@@ -117,48 +117,45 @@ ingest:
 
 ### Step 5.4 — Continue.dev configuration
 
-**File:** `~/.continue/config.json`
+**File:** `~/.continue/config.yaml`
 
-```json
-{
-  "models": [
-    {
-      "title": "Local Copilot (Qwen2.5-Coder)",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:7b",
-      "apiBase": "http://localhost:11434"
-    },
-    {
-      "title": "Local Vision (LLaVA)",
-      "provider": "ollama",
-      "model": "llava:13b",
-      "apiBase": "http://localhost:11434"
-    }
-  ],
-  "tabAutocompleteModel": {
-    "title": "Qwen2.5-Coder Autocomplete",
-    "provider": "ollama",
-    "model": "qwen2.5-coder:7b",
-    "apiBase": "http://localhost:11434"
-  },
-  "embeddingsProvider": {
-    "provider": "ollama",
-    "model": "nomic-embed-text",
-    "apiBase": "http://localhost:11434"
-  },
-  "contextProviders": [
-    { "name": "code" },
-    { "name": "file" },
-    { "name": "codebase" },
-    { "name": "diff" },
-    { "name": "terminal" }
-  ],
-  "slashCommands": [
-    { "name": "edit",    "description": "Apply a targeted code edit" },
-    { "name": "comment", "description": "Add docstrings and comments" },
-    { "name": "test",    "description": "Generate unit tests" }
-  ]
-}
+```yaml
+models:
+  - title: "Local Copilot (Qwen2.5-Coder)"
+    provider: ollama
+    model: qwen2.5-coder:7b
+    apiBase: "http://localhost:11434"
+  - title: "Local Vision (LLaVA)"
+    provider: ollama
+    model: "llava:13b"
+    apiBase: "http://localhost:11434"
+
+tabAutocompleteModel:
+  title: Qwen2.5-Coder Autocomplete
+  provider: ollama
+  model: qwen2.5-coder:7b
+  apiBase: "http://localhost:11434"
+
+embeddingsProvider:
+  provider: ollama
+  model: nomic-embed-text
+  apiBase: "http://localhost:11434"
+
+contextProviders:
+  - name: code
+  - name: file
+  - name: codebase
+  - name: diff
+  - name: terminal
+
+slashCommands:
+  - name: edit
+    description: Apply a targeted code edit
+  - name: comment
+    description: Add docstrings and comments
+  - name: test
+    description: Generate unit tests
+
 ```
 
 **Key Continue.dev shortcuts:**

@@ -14,20 +14,17 @@ ENDPOINT = "http://localhost:11434"
 
 OPTIONS = OllamaOptions(
     endpoint=ENDPOINT,
-    model_name="qwen2.5-coder:14b",
+    model_name="qwen2.5-coder:7b",
     timeout_seconds=10,
 )
 
 
-def _tags_response(model_name: str = "qwen2.5-coder:14b") -> dict:
+def _tags_response(model_name: str = "qwen2.5-coder:7b") -> dict:
     return {"models": [{"name": model_name}]}
 
 
-def _stream_lines(*tokens: str, done: bool = True) -> bytes:
-    lines = [json.dumps({"message": {"content": t}, "done": False}) for t in tokens]
-    if done:
-        lines.append(json.dumps({"message": {"content": ""}, "done": True}))
-    return "\n".join(lines).encode()
+def _chat_response(content: str) -> dict:
+    return {"message": {"role": "assistant", "content": content}, "done": True}
 
 
 # ── is_ready ─────────────────────────────────────────────────────────────────
@@ -64,12 +61,12 @@ async def test_is_ready_returns_false_when_model_not_in_response() -> None:
 @respx.mock
 async def test_stream_chat_yields_tokens_in_order() -> None:
     respx.post(f"{ENDPOINT}/api/chat").mock(
-        return_value=httpx.Response(200, content=_stream_lines("Hello", " world", "!"))
+        return_value=httpx.Response(200, json=_chat_response("Hello world!"))
     )
     client = OllamaClient(OPTIONS)
     messages = [ChatMessage(role="user", content="hi")]
     tokens = [t async for t in client.stream_chat(messages)]
-    assert tokens == ["Hello", " world", "!"]
+    assert tokens == ["Hello world!"]
 
 
 @respx.mock

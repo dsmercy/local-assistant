@@ -14,7 +14,7 @@ developer** who also uses React, TypeScript, Node.js, and JavaScript.
 |---|---|
 | Agent infrastructure | Python · Ollama · LangChain · ChromaDB · FastAPI |
 | Developer help target | C# · ASP.NET Core · EF Core · React · Node.js · JS |
-| Model | `qwen2.5-coder:14b` via Ollama |
+| Model | `qwen2.5-coder:7b` via Ollama |
 | IDE interface | Continue.dev (VS Code) — sole interface |
 
 ---
@@ -80,7 +80,7 @@ not source code. Claude Code writes to `src/`, `tests/`, and `scripts/` only.
 
 ```bash
 make setup        # create venv + install dependencies
-make pull-models  # ollama pull qwen2.5-coder:14b + nomic-embed-text + llava:13b
+make pull-models  # ollama pull qwen2.5-coder:7b + nomic-embed-text + llava:13b
 make ingest       # index context_store/ into ChromaDB
 make serve        # start FastAPI agent server on localhost:8765
 make test         # pytest -x --cov=src

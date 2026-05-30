@@ -45,7 +45,7 @@ make pull-models
 ollama list
 ```
 
-- [ ] `qwen2.5-coder:14b` appears in `ollama list`
+- [ ] `qwen2.5-coder:7b` appears in `ollama list`
 - [ ] `nomic-embed-text` appears in `ollama list`
 - [ ] `llava:13b` appears in `ollama list`
 
@@ -59,7 +59,7 @@ cat .env
 ```
 
 - [ ] `.env` file exists
-- [ ] `OLLAMA_MODEL_NAME=qwen2.5-coder:14b` is set
+- [ ] `OLLAMA_MODEL_NAME=qwen2.5-coder:7b` is set
 - [ ] `.env` is listed in `.gitignore` (run `git check-ignore .env` → prints `.env`)
 
 ---
