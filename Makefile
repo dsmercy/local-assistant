@@ -8,7 +8,7 @@ setup:
 	@echo "\nSetup complete. Activate: source .venv/bin/activate"
 
 pull-models:
-	ollama pull qwen2.5-coder:7b
+	ollama pull qwen2.5-coder:14b
 	ollama pull nomic-embed-text
 	ollama pull llava:13b
 	@echo "\nAll models ready."
@@ -98,3 +98,41 @@ clean:
 	find . -name "*.pyc" -delete 2>/dev/null || true
 	rm -rf htmlcov .coverage dist build *.egg-info 2>/dev/null || true
 	@echo "Clean complete"
+
+# ── ChromaDB browsing ──────────────────────────────────────────────────────
+chroma-summary:
+	python scripts/view_chroma.py
+
+chroma-instructions:
+	python scripts/view_chroma.py --collection instructions
+
+chroma-codebase:
+	python scripts/view_chroma.py --collection codebase
+
+chroma-samples:
+	python scripts/view_chroma.py --collection samples
+
+chroma-search:
+	@read -p "Search query: " q; python scripts/view_chroma.py --search "$$q"
+
+# ── Code repository management ─────────────────────────────────────────────
+repo-list:
+	python scripts/add_repo.py --list
+
+repo-add-local:
+	@read -p "Local repo path: " p; python scripts/add_repo.py --path "$$p"
+
+repo-add-github:
+	@read -p "GitHub URL: " u; python scripts/add_repo.py --github "$$u"
+
+repo-remove:
+	@read -p "Repo name to remove: " n; python scripts/add_repo.py --remove "$$n"
+
+# Add repo + re-ingest in one command
+repo-add-and-ingest:
+	@read -p "Local path or GitHub URL: " src; \
+	  if echo "$$src" | grep -q "github.com"; then \
+	    python scripts/add_repo.py --github "$$src"; \
+	  else \
+	    python scripts/add_repo.py --path "$$src"; \
+	  fi && python scripts/ingest.py
